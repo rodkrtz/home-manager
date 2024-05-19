@@ -73,17 +73,6 @@
     enable = true;
     settings = {
       add_newline = false;
-      prompt_order = [
-        "username"
-        "hostname"
-        "directory"
-        "git_branch"
-        "git_status"
-        "cmd_duration"
-        "line_break"
-        "jobs"
-        "character"
-      ];
     };
   };
   programs.zsh = {
