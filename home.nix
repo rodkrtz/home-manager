@@ -81,6 +81,8 @@
     enableCompletion = true;
     initExtra = ''
       eval "$(starship init zsh)"
+      
+      alias rebuild='sudo nixos-rebuild switch --flake ~/home-manager#rodkrtz'	
     '';
   };
 }
