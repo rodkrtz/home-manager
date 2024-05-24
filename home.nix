@@ -18,6 +18,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    pkgs.neovim
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -68,21 +69,26 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
+ 
   programs.starship = {
     enable = true;
     settings = {
       add_newline = false;
     };
   };
-  programs.zsh = {
+
+  programs.fish = {
     enable = true;
-    enableAutosuggestions = true;
-    enableCompletion = true;
-    initExtra = ''
-      eval "$(starship init zsh)"
-      
-      alias rebuild='sudo nixos-rebuild switch --flake ~/home-manager#rodkrtz'	
+    interactiveShellInit = ''
+      starship init fish | source
+
+      set -U fish_greeting "🐟"
+
+      function rebuild
+        sudo nixos-rebuild switch --flake ~/.config/home-manager#rodkrtz
+        and home-manager switch --flake ~/.config/home-manager#rodkrtz
+      end
     '';
   };
+
 }
